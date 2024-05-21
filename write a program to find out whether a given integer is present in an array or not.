@@ -1,0 +1,14 @@
+package java_ques;
+
+public class java_array2 {
+    public static void main(String[]args){
+    //write a program to find out whether a given integer is present in an array or not;
+    int[]num={1,5,7,8,6,9};
+    int key = 8;
+    for(int i=0;i< num.length;i++){
+    if(key == num[i]){
+    System.out.println("element found at" + i);
+    }
+    }
+    }
+}
