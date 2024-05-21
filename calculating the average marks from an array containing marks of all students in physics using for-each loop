@@ -1,0 +1,23 @@
+package java_ques;
+
+/**
+ *
+ * @author kushn
+ */
+public class java_arr3 {
+    public static void main(String[]args){
+    //calculating the average marks from an array containing marks of all students in physics using for-each loop;
+    /*for each loop;
+    for (type variableName : arrayName) {
+        // code block to be executed
+    }
+    */
+    int[]phy={50,20,70,60,35,40};
+    int sum = 0;
+    for(int num : phy){
+        sum += num;
+    }
+    double average = (double)sum/phy.length;
+    System.out.println(average);
+}
+}
