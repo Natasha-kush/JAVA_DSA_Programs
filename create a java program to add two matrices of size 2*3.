@@ -1,0 +1,35 @@
+package java_ques;
+
+/**
+ *
+ * @author kushn
+ */
+public class java_arr4 {
+    public static void main(String[]args){
+    /*In this example, we first declare and initialize two 2x3 matrices matrix1 and matrix2 
+    with some sample values. We also declare and initialize a new 2x3 matrix result to store the sum of the two matrices.
+    Next, we use nested for loops to iterate through each element of the two matrices 
+    and add them together, storing the result in the corresponding element of the result matrix.*/
+
+    int matrix[][]={{2,3,4},{2,3,4}};
+    int matrix1[][]={{2,3,4},{2,3,4}};
+    int result[][]= new int[2][3];
+    
+ for(int i=0; i<2; i++){
+ for(int j=0; j<3; j++){
+    result[i][j]= matrix[i][j] + matrix1[i][j];
+    
+    }
+    }
+    /*Next, we use nested for loops to iterate through each element in the matrices and 
+     add the corresponding elements in matrix1 and matrix2, storing the result in result.
+     Finally, we print the sum of the two matrices to the console.*/
+
+ for(int i=0; i<2; i++){
+ for(int j=0; j<3; j++){
+     System.out.print(result[i][j] + " ");
+    }
+     System.out.println();
+    }
+    }
+}
