@@ -1,0 +1,21 @@
+/**
+ *write an algo if a string is a palindrome;
+ * @author kushn
+ */
+public class String_palindrome {
+    
+    public static boolean ispalin(String str){
+    for(int i=0; i<str.length()/2; i++){
+        int n = str.length();
+        if(str.charAt(i) != str.charAt(n-1-i)){
+         return false;
+       }
+    }
+      return true;
+    }
+    public static void main(String[]args){
+      String str= "whoop";
+      System.out.println(ispalin(str));
+    }
+    
+}
