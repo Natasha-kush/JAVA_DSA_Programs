@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+/**
+ *
+ * @author kushn
+ */
+public class Anagram_String {
+    public static void main(String[]args){
+     String st1= "fuse time";
+     String st2 = "sufe mite";
+     //remove spaces
+     st1 = st1.replace(" ", "");
+     st2 = st2.replace(" ", "");
+     //covert to lowercase;
+     st1= st1.toLowerCase();
+     st2= st2.toLowerCase();
+     //covert to an char array;
+     char []arr1= st1.toCharArray();
+     char []arr2= st2.toCharArray();
+     //sort the array;
+     Arrays.sort(arr1);
+     Arrays.sort(arr2);
+     //condition
+     if(Arrays.equals(arr1, arr2)){
+        System.out.println("It  is an anagram");
+         }else{
+        System.out.println("It is not an anagram");
+     }
+    
+     
+    }
+}
