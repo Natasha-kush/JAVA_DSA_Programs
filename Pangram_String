@@ -1,0 +1,31 @@
+package leetcode_solution;
+
+/**
+ *
+ * @author kushn
+ */
+public class Pangram_String {
+
+    public static void main(String[] args) {
+        boolean flag = false;
+        String str = "the quick brown fox jumps over lazy dog";
+        str = str.replace(" ", "");
+        char[] arr = str.toCharArray();
+        int arr1[] = new int[26];
+
+        for (int i = 0; i < arr.length; i++) {
+            arr1[arr[i] - 'a']++;
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] == 0) {
+                System.out.println("it is not an pangram");
+                flag = true;
+                break;// Exit the loop if any letter is missing
+            }
+        }
+        if (flag == false) {
+            System.out.println("it is an pangram");
+        }
+
+    }
+}
