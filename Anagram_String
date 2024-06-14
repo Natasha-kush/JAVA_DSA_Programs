@@ -1,7 +1,5 @@
 import java.util.Arrays;
-
 /**
- *
  * @author kushn
  */
 public class Anagram_String {
@@ -25,8 +23,6 @@ public class Anagram_String {
         System.out.println("It  is an anagram");
          }else{
         System.out.println("It is not an anagram");
-     }
-    
-     
+     }   
     }
 }
