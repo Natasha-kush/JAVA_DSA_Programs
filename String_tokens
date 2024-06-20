@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String s = scan.nextLine();
+        s= s.trim();
+        String token[]=s.split("[^A-Za-z]+");;
+        if(s.length()==0){
+            System.out.println(0);
+        }else{
+            System.out.println(token.length);
+        }
+        for(String typo:token){
+            System.out.println(typo);
+        }
+        scan.close();
+    }
+}
+
