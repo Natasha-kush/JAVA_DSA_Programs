@@ -1,12 +1,12 @@
 class Solution {
- public class Main {
+
     public static void main(String[] args) {
         Solution solution = new Solution();
         String s = "PAYPALISHIRING";
         int numRows = 3;
         String result = solution.convert(s, numRows);
         System.out.println("Result: " + result);
-    }
+    
 }
     public String convert(String s, int numRows) {
         StringBuilder sb[] = new StringBuilder[numRows];
