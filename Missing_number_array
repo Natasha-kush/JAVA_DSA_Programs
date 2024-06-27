@@ -1,0 +1,20 @@
+public class MissingNumberFind {
+    public static int findMissingNumber(int n, int[] arr) {
+        int totalSum = n * (n + 1) / 2;
+    
+        int arraySum = 0;
+        for (int num : arr) {
+            arraySum += num;
+        }
+       
+        return totalSum - arraySum;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        int[] arr = {1, 2, 3, 5};
+        
+        int missingNumber = findMissingNumber(n, arr);
+        System.out.println("Missing number hai: " + missingNumber);
+    }
+}
