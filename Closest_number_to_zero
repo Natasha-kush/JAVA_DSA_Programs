@@ -1,0 +1,16 @@
+public int findClosestToZero(int[] nums) {
+    int minAbs = Integer.MAX_VALUE;
+    int closestToZero = 0;
+
+    for (int num : nums) {
+        int absNum = Math.abs(num);
+        if (absNum < minAbs) {
+            minAbs = absNum;
+            closestToZero = num;
+        } else if (absNum == minAbs) {
+            closestToZero = Math.max(closestToZero, num);
+        }
+    }
+
+    return closestToZero;
+}
