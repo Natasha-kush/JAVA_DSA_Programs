@@ -2,19 +2,22 @@ public class container_with_most_water {
 
     public static void main(String[] args) {
         int height[] = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-        System.out.println(maxarea(height));
+        System.out.println(maxarea(height));  //calling the function
     }
 
     static int maxarea(int[] height) {
         int maxArea = 0; // this will store our marimum area with water
-        int left = 0;
-        int right = height.length - 1;
+        int left = 0;   //left pointer
+        int right = height.length - 1;  //right pointer
         while (left < right) {
+
             int width = right - left;
             int minheight = Math.min(height[left], height[right]);
             int currentarea = width * minheight;
+
             //if currentarea is maximum than update the maxarea;
             maxArea = Math.max(currentarea, maxArea);
+
          // if else using for finding maximum height 
             if (left < right) {
                 left++;
