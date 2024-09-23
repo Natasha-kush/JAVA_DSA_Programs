@@ -1,0 +1,14 @@
+class HelloWorld {
+    public static void main(String[] args) {
+      char A = 'a';  
+        char B = 'b'; 
+         //swapping
+          a = (char)(a+b);
+          b = (char)(a-b);
+          a = (char)(a-b);
+           
+           System.out.println( " A is " + a + " B is " + b);
+    
+       
+    }
+}
