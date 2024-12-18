@@ -1,0 +1,21 @@
+public class local{
+public static void main(String[] args) {
+        int arr[] = {5, 2, 9};
+        int count = countmissing(arr);
+        System.out.println("Integers required to make array strictly increasing: " + count);
+    }
+
+    public static int countmissing(int arr[]) {
+             int count =0; // this will store missing element
+             for(int i=0; i<arr.length; i++){
+                   if(arr[i]>= arr[i+1]){
+                        int missed = arr[i] -arr[i+1]+1;
+                        count += missed;
+                        
+                   arr[i+1]=arr[i]+1; //update
+                   }
+             
+             }
+             return count;
+    }
+}
