@@ -1,0 +1,31 @@
+import java.util.Arrays;
+
+public class check_series_is_AP_or_not {
+
+    public static boolean checkAP(int arr[], int n) {
+        //base case
+        if (n == 1) {
+            return true;
+        }
+        Arrays.sort(arr); //sorting the array
+        //calculate the difference
+        int d = arr[1] - arr[0];
+        //check the consecutive elements with difference
+        for (int i = 2; i < n; i++) {
+            if (arr[i] - arr[i - 1] == d) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1, 4, 5, 10, 50};
+        int n = arr.length;
+        if (checkAP(arr, n)) {
+            System.out.print("true");
+        } else {
+            System.out.print("false");
+        }
+    }
+}
