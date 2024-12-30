@@ -1,0 +1,28 @@
+public class max_sum_subarray_of_length_k {
+
+    public static int findmaxsum(int[] arr, int k) {
+        int maxsum = 0;
+        int sum = 0;
+        int n = arr.length;
+        int index = 0;
+        while (index < n && index < k) {
+            sum += arr[index];
+            index++;
+        }
+        for (int i = 1; i < n - k + 1; i++) {
+            int pv = arr[i - 1];
+            int nv = arr[i + k - 1];
+            sum = sum - pv + nv;
+            maxsum = Math.max(maxsum, sum);
+
+        }
+        return maxsum;
+
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {100, 200, 300, 400};
+        int k = 2; //window range
+        System.out.print(findmaxsum(arr,k));
+    }
+}
