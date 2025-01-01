@@ -1,0 +1,40 @@
+class Solution {
+
+    // Function to find the first negative integer in every window of size k
+    static List<Integer> FirstNegativeInteger(int arr[], int k) {
+       Queue<Integer> qu = new LinkedList<>(); // Queue to store negative numbers
+        int index = 0;
+        int n = arr.length;
+
+        // Process the first window of size k
+        while (index < k) {
+            if (arr[index] < 0) { // If element is negative, add to queue
+                qu.offer(arr[index]);
+            }
+            index++;
+        }
+
+        // Result array to store first negatives for each window
+        List<Integer> res = new ArrayList<>();
+        res.add(qu.isEmpty() ? 0 : qu.peek()); // First negative for the first window
+
+        // Process the remaining windows
+        for (int i = 1; i <= n - k; i++) {
+            // Remove the element going out of the window
+            if (arr[i - 1] < 0) {
+                qu.poll();
+            }
+
+            // Add the new element coming into the window
+            if (arr[i + k - 1] < 0) {
+                qu.offer(arr[i + k - 1]);
+            }
+
+            // Add the first negative element of the current window
+            res.add(qu.isEmpty() ? 0 : qu.peek());
+        }
+
+        return res;
+    }
+}
+
