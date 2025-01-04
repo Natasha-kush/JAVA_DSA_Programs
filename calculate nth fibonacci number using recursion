@@ -1,0 +1,20 @@
+public class nth_fibonacci_number {
+
+    public static int fibo(int n) {
+        //base case
+        if (n == 0 || n == 1) {
+            return n;
+        }
+        int fibo1 = fibo(n - 1);
+        int fibo2 = fibo(n - 2);
+        int fibcal = fibo1 + fibo2;
+        return fibcal;
+        
+    }
+    
+    public static void main(String[] args) {
+        int n = 8;
+        System.out.print(fibo(n));
+        
+    }
+}
