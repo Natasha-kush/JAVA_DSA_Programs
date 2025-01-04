@@ -1,0 +1,18 @@
+public class print_numbers_increasing {
+
+    public static void print(int n) {
+        // base case
+        if (n == 1) {
+            System.out.print(n + " ");
+            return;
+        }
+        print(n - 1); //recursive call
+        System.out.print(n + " ");
+        
+    }
+
+    public static void main(String[] args) {
+         int n = 5;
+         print(n);
+    }
+}
