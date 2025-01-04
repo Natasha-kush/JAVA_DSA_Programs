@@ -1,0 +1,19 @@
+public class print_sum_of_n_natural_numbers {
+
+    public static int sum(int n) {
+        //base condition
+        if (n == 1) {
+            return 1;
+        }
+        int calsum = sum(n - 1);
+        int calsum1 = n + calsum;
+        return calsum1;
+        
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        System.out.print(sum(n));
+        
+    }
+}
