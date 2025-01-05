@@ -1,0 +1,19 @@
+public class first_occurence_of_an_element_in_array {
+    public static int firstoccurence(int arr[], int key, int i) {
+        //base case;
+        if (i == arr.length) {
+            return -1;
+        }
+        if (arr[i] == key) {
+            return i;
+        }
+        return firstoccurence(arr, key, i+1);
+        
+    }
+    
+    public static void main(String[] args) {
+        int arr[] = {1, 5, 8, 6, 5, 4, 5, 5,};
+        int key = 4;
+        System.out.print(" Element found at index " + firstoccurence(arr, key, 0));
+    }
+}
