@@ -1,0 +1,21 @@
+public class optimized_x_tothepower_n {
+
+    public static int power(int x, int n) {
+        //base case
+        if (n == 0) {
+            return 1;
+        }
+        int calpower = power(x, n/2);
+        int calpower2 = calpower * calpower;
+        //for odd case
+        if (n % 2 != 0) {
+            calpower2 = x * calpower2;
+
+        }
+        return calpower2;
+    }
+
+    public static void main(String[] args) {
+         System.out.print(power(2,5));
+    }
+}
