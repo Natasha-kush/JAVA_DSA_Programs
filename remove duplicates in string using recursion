@@ -1,0 +1,23 @@
+public class remove_duplicate_string {
+ public static void removed(String str, int idx, StringBuilder newstr, boolean map[]) {
+        //base case
+        if (idx == str.length()) {
+            System.out.print(newstr);
+            return;
+        }
+        char current = str.charAt(idx);
+        if (map[current - 'a'] == true) {
+            removed(str, idx + 1, newstr, map);
+        } else {
+            map[current - 'a'] = true;
+            removed(str, idx + 1, newstr.append(current), map);
+
+        }
+
+    }
+
+    public static void main(String args[]) {
+        String str = "natashakushwah";
+        removed(str, 0, new StringBuilder(""), new boolean[26]);
+    }
+}
