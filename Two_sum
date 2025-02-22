@@ -1,0 +1,37 @@
+import java.util.*;
+public class two_sum {
+  //function 
+    public static boolean twoSum(int arr[], int target) {
+        Arrays.sort(arr);
+        //initialize two pointer
+        int left = 0;
+        int right = arr.length - 1;
+
+        //while loop
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            if (sum == target) {
+                return true;
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {0, -1, 2, -3, 1}; // Ek input array diya gaya hai
+        int target = -5; // Target sum define kiya gaya hai
+
+        // Function call kar rahe hain aur agar true return hota hai to "true" print hoga
+        if (twoSum(arr, target)) {
+            System.out.println("true"); // Pair mil gaya to print karega "true"
+        } else {
+            System.out.println("false"); // Pair nahi mila to print karega "false"
+        }
+
+    }
+}
