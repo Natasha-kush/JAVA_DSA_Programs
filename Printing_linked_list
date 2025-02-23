@@ -1,0 +1,43 @@
+public class Print_list {
+    public class Node {
+
+        int data;
+        Node next;
+        //constructor
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+    public static Node head;
+    public static Node tail;
+//function for addlast
+    public void addlast(int data) {
+        Node newnode = new Node(data);
+        if (head == null) {
+            head = tail = newnode;
+            return;
+        }
+        tail.next = newnode;
+        tail= newnode;// Tail ko update kar do taki last node pe point kare
+
+    }
+//function for print , arguments nhi dena he isme
+    public static void print() { 
+    Node temp = head; // Ek temporary pointer 'temp' banaya jo linked list ke head par point karega.
+
+    while (temp != null) { // Jab tak temp null nahi ho jata, tab tak loop chalega (matlab last node tak traverse karega)
+        System.out.print(temp.data + " "); // Current node ka data print kar raha hai
+        temp = temp.next; // Temp ko next node par move kar diya (agla node check karne ke liye)
+    }
+
+    System.out.println(); // Ek new line print kiya taaki output clean dikhe
+}
+
+    public static void main(String[] args) {
+      Print_list obj = new Print_list();
+      obj.addlast(10);
+      obj.addlast(50);
+      print();
+    }
+}
