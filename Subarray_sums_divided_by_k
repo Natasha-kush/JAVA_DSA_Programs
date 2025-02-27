@@ -1,0 +1,56 @@
+public class Subarray_sums_divided_by_k {
+    public int subarraysDivByK(int[] nums, int k) {
+        // Ek array `map` bna rhe hain jo `k` size ka hai, 
+        // jisme har index pe 0 initially hoga.
+        int map[] = new int[k];
+        
+        // Pehle se `map[0] = 1` set kr rhe hain, 
+        // kyunki agar sum khud `k` se divisible ho to ek valid subarray mil jaye.
+        map[0] = 1; 
+
+        // `sum` variable jo current subarray ka sum track karega
+        int sum = 0;
+
+        // `res` variable final count store karega jitne subarrays divisible hain `k` se
+        int res = 0;
+
+        // Loop chalaya pura `nums` array par
+        for (int i = 0; i < nums.length; i++) {
+            // `sum` ko update kiya current element add karke
+            sum += nums[i];
+
+            // `mod` variable ko sum ka remainder store karne ke liye use kiya
+            int mod = sum % k;
+
+            // Java me negative remainder aa skta hai, isliye usko positive bnane ke liye
+            if (mod < 0) {
+                mod = mod % k + k; // Negative ko positive remainder me convert krna
+            }
+
+            // Agar ye remainder pehle se `map` me present hai, 
+            // iska matlab hai ki `mod` ka sum pehle bhi aaya tha, 
+            // to valid subarrays ka count `res` me add krdo.
+            res += map[mod];
+
+            // Ab current remainder ka count badha do `map` me
+            map[mod]++;
+        }
+
+        // Final result return kr diya, jitne subarrays divisible the `k` se
+        return res;
+    }
+
+    public static void main(String[]args){
+        Subarray_sums_divided_by_k obj = new Subarray_sums_divided_by_k();
+        // Example test case
+        int[] nums = {4, 5, 0, -2, -3, 1};
+        int k = 5;
+        
+        int result = obj.subarraysDivByK(nums, k);
+        
+        // Print the result
+        System.out.println("Number of subarrays divisible by " + k + " = " + result);
+    
+    
+    }
+}
