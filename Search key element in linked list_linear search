@@ -1,0 +1,78 @@
+public class Search_key {
+    // Class banaya jo ek linked list implement karega jisme hum elements last me add kar sakte hain
+
+    // Node class banaya jo ek node ko represent karega
+    public class Node {
+
+        int data; // Node ka data store karega
+        Node next; // Next node ka reference store karega
+
+        // Constructor jo ek naya node banayega aur uska next initially null hoga
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+    // Head and Tail pointers ko static banaya taki ye shared rahein
+    public static Node head;
+    public static Node tail;
+
+    public void addlast(int data) {
+        // Naya node banaya jisme `data` diya gaya hai
+        Node newNode = new Node(data);
+        // Agar linked list empty hai to head aur tail dono naya node honge
+        if (head == null) {
+            head = tail = newNode;
+            return;
+        }
+        // Agar list me pehle se nodes hain, to tail.next me naya node jod do
+        tail.next = newNode;
+        tail = newNode; // Tail ko update kar do taki last node pe point kare
+    }
+
+    public int search(int key) {
+        // Temporary pointer `temp` ko head par set kiya
+        Node temp = head;
+
+        // Index track karne ke liye `i` variable rakha
+        int i = 0;
+
+        // Jab tak temp null nahi hota, loop chalayenge
+        while (temp != null) {
+            // Agar current node ka data key ke barabar hai toh index return karo
+            if (temp.data == key) {
+                return i;
+            }
+
+            // Temp ko aage badhaya next node par
+            temp = temp.next;
+
+            // Index ko 1 se badhaya
+            i++;
+        }
+
+        // Agar pura loop chal gaya aur key nahi mili toh -1 return karo (matlab element list me nahi hai)
+        return -1;
+    }
+
+    public static void display() {
+        Node temp = head; // Temp pointer banaya jo head se start karega
+
+        // Jab tak temp null nahi hota, tab tak data print karo
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next; // Agle node pe move kar jao
+        }
+        System.out.println("null"); // Last me null print karna zaroori hai
+    }
+
+    public static void main(String[] args) {
+        Search_key obj = new Search_key();
+        obj.addlast(20); // 20 insert kiya last me
+        obj.addlast(30); // 30 insert kiya last me
+        obj.addlast(50); // 50 insert kiya last me
+        System.out.println(obj.search(30));
+
+        display(); // Linked list ko print karne ke liye function call kiya
+    }
+}
