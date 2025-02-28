@@ -1,0 +1,35 @@
+import java.util.*;
+public class Find_all_duplicates {
+     public List<Integer> findDuplicates(int[] nums) {
+        // Ek list banayi jisme duplicates store honge
+        List<Integer> result = new ArrayList<>();
+
+        // Loop chalayenge poore array ke elements par
+        for(int i = 0; i < nums.length; i++) {
+            // Index nikalne ke liye current element ka absolute value lenge aur 1 minus karenge
+            int index = Math.abs(nums[i]) - 1;
+
+            // Agar nums[index] already negative hai, iska matlab yeh number pehle aaya tha, toh duplicate hai
+            if(nums[index] < 0) {
+                result.add(index + 1); // Duplicate element ko result list mein add karenge
+            }
+
+            // Current index ka value negative karenge, taaki dobara mile toh pata chal sake ki yeh duplicate hai
+            nums[index] = nums[index] * -1;
+        }
+         // Jo bhi duplicates mile, unko return karenge
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Find_all_duplicates obj = new Find_all_duplicates();
+        // Test case
+        int[] nums = {4, 3, 2, 7, 8, 2, 3, 1};
+
+        // findDuplicates method ko call kiya
+        List<Integer> duplicates = obj.findDuplicates(nums);
+
+        // Output print kiya
+        System.out.println("Duplicate numbers: " + duplicates);
+    }
+}
