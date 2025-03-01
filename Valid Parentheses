@@ -1,0 +1,28 @@
+import java.util.*;
+public class ValidParanthesis {
+     public static boolean isValid(String s) { // isValid function jo ek string s ko input lega aur boolean return karega
+        Stack<Character> stack = new Stack<>(); // Ek stack banaya jo sirf characters store karega
+        
+        for (char c : s.toCharArray()) { // String ko char array me convert kar ke har character par loop chalaya
+            if (c == '(') { 
+                stack.push(')'); // Agar '(' aaya to uska corresponding closing ')' stack me push kiya
+            } else if (c == '[') {
+                stack.push(']'); // Agar '[' aaya to uska corresponding closing ']' stack me push kiya
+            } else if (c == '{') {
+                stack.push('}'); // Agar '{' aaya to uska corresponding closing '}' stack me push kiya
+            } else if (stack.isEmpty() || stack.pop() != c) { 
+                // Agar koi closing bracket aaya aur stack empty hai, ya stack ka top element match nahi kar raha
+                return false; // Invalid bracket sequence, to false return kar diya
+            }
+        }
+ 
+        return stack.isEmpty(); // Agar sab brackets valid the to stack empty hoga, warna nahi
+    }
+
+    public static void main(String[] args) {
+        ValidParanthesis obj = new ValidParanthesis();
+        String s = "(([])";
+        System.out.println(obj.isValid(s));
+
+    }
+}
