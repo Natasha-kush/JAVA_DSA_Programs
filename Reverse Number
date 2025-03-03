@@ -1,0 +1,20 @@
+import java.util.Scanner; // Scanner class ko import kar rahe hain user input lene ke liye
+public class ReverseNumber {
+  
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in); // Scanner object banaya input lene ke liye
+        
+        System.out.print("Enter a number: ");
+        int num = sc.nextInt(); // User se ek integer number input lene ke liye
+        
+        int rev = 0; // Reverse number store karne ke liye ek variable
+        
+        while (num != 0) { // Jab tak num 0 nahi ho jata, loop chalta rahega
+            int digit = num % 10; // Last digit nikalne ke liye mod operator (%) ka use kiya
+            rev = rev * 10 + digit; // Reverse number banane ke liye formula
+            num = num / 10; // Last digit hata rahe hain (num ko 10 se divide kar rahe hain)
+        }
+
+        System.out.println("Reversed Number: " + rev); // Reverse number print kar rahe hain
+    }
+}
