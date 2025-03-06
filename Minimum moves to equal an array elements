@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class MinimumMovesToEqualArrayElements {
+    public int minMoves(int[] nums) {
+        // Step 1: Minimum value store karne ke liye ek variable banate hain
+        int min = Integer.MAX_VALUE; // Initially min ko maximum possible value se initialize karte hain
+
+        // Step 2: Array ka total sum calculate karne ke liye ek variable banate hain
+        int sum = 0;
+
+        // Step 3: Array ke har element par loop chalate hain
+        for (int num : nums) {
+            // Har element ke saath compare karke minimum value nikalte hain
+            min = Math.min(min, num);
+
+            // Array ke sare elements ka sum calculate karte hain
+            sum += num;
+        }
+
+        // Step 4: Total moves ka formula apply karte hain
+        return sum - (min * nums.length);
+    }
+
+    // Main function jo program ko run karega
+    public static void main(String[] args) {
+        MinimumMovesToEqualArrayElements sol = new MinimumMovesToEqualArrayElements();
+        Scanner sc = new Scanner(System.in);
+
+        // User se array ka input lene ke liye
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+
+        int[] nums = new int[n];
+        System.out.println("Enter array elements: ");
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        // minMoves function call kar ke result print karte hain
+        int result = sol.minMoves(nums);
+        System.out.println("Minimum moves required: " + result);
+
+        sc.close(); // Scanner close karna zaroori hai memory leak avoid karne ke liye
+    }
+}
