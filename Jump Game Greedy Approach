@@ -1,0 +1,30 @@
+public class JumpGame {
+    public boolean canJump(int[] nums) {
+        // 'finalposition' ko last index pe set kar rahe hain, jo ki destination hai
+        int finalposition = nums.length - 1;
+
+        // Hum array ke second-last index se reverse traverse kar rahe hain
+        for (int idx = nums.length - 2; idx >= 0; idx--) {
+
+            // Agar current index se finalposition tak pahunch sakte hain
+            if (idx + nums[idx] >= finalposition) {
+                // Toh finalposition ko update kar do, kyunki ab yeh naya destination ban sakta
+                // hai
+                finalposition = idx;
+            }
+        }
+
+        // Agar finalposition 0 ho gaya, iska matlab hum starting point se last tak ja
+        // sakte hain
+        return finalposition == 0;
+    }
+
+    public static void main(String args[]) {
+        JumpGame obj = new JumpGame();
+        int[] nums1 = { 2, 3, 1, 1, 4 }; // Expected Output: true
+        int[] nums2 = { 3, 2, 1, 0, 4 }; // Expected Output: false
+
+        System.out.println(obj.canJump(nums1)); // true
+        System.out.println(obj.canJump(nums2)); // false
+    }
+}
