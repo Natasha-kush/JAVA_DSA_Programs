@@ -1,0 +1,56 @@
+package Array_dsa;
+
+import java.util.Arrays;
+
+public class ReversePair {
+
+    public int ret; // ret variable store karega total reverse pairs count
+
+    // Main function jo reversePairs() call karega
+    public static void main(String[] args) {
+        ReversePair sol = new ReversePair(); // Solution class ka object banaya
+        int[] nums = { 2, 4, 3, 5, 1 }; // Example input array
+        int result = sol.reversePairs(nums); // Function call
+        System.out.println("Number of Reverse Pairs: " + result); // Output print karo
+    }
+
+    // Reverse Pairs count karne ka function
+    public int reversePairs(int[] nums) {
+        ret = 0; // Pehle count ko 0 initialize kar diya
+        mergeSort(nums, 0, nums.length - 1); // Merge Sort function call (poora array pe)
+        return ret; // Total reverse pairs return karo
+    }
+
+    // Merge Sort function jo recursively array ko divide karega
+    public void mergeSort(int[] nums, int left, int right) {
+        // Base case: Agar ek ya zero elements bache toh return kar do
+        if (right <= left) {
+            return;
+        }
+
+        // Array ka middle index nikalna (to avoid overflow: left + (right - left) / 2)
+        int middle = left + (right - left) / 2;
+
+        // Pehle left half sort karo
+        mergeSort(nums, left, middle);
+
+        // Phir right half sort karo
+        mergeSort(nums, middle + 1, right);
+
+        // Count reverse pairs
+        int count = 0;
+        for (int l = left, r = middle + 1; l <= middle;) {
+            // Agar r pointer boundary ke bahar chala gaya OR condition satisfy nahi ho rahi
+            if (r > right || (long) nums[l] <= 2 * (long) nums[r]) {
+                l++; // Left pointer ko aage badhao
+                ret += count; // Reverse pairs count ko update karo
+            } else {
+                r++; // Right pointer ko aage badhao
+                count++; // Count increase karo kyunki ek reverse pair mila
+            }
+        }
+
+        // **Step 3: Merge the two sorted halves**
+        Arrays.sort(nums, left, right + 1);// Current range ko sort kar diya
+    }
+}
