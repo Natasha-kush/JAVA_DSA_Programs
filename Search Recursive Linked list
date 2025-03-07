@@ -1,0 +1,86 @@
+package Linked_List;
+
+public class SearchRecursive {
+    // Node class banaya jo ek node ko represent karega
+    public class Node {
+
+        int data; // Node ka data store karega
+        Node next; // Next node ka reference store karega
+
+        // Constructor jo ek naya node banayega aur uska next initially null hoga
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    // Head and Tail pointers ko static banaya taki ye shared rahein
+    public static Node head;
+    public static Node tail;
+
+    public void addlast(int data) {
+        // Naya node banaya jisme `data` diya gaya hai
+        Node newNode = new Node(data);
+        // Agar linked list empty hai to head aur tail dono naya node honge
+        if (head == null) {
+            head = tail = newNode;
+            return;
+        }
+        // Agar list me pehle se nodes hain, to tail.next me naya node jod do
+        tail.next = newNode;
+        tail = newNode; // Tail ko update kar do taki last node pe point kare
+    }
+
+    public static void display() {
+        Node temp = head; // Temp pointer banaya jo head se start karega
+
+        // Jab tak temp null nahi hota, tab tak data print karo
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next; // Agle node pe move kar jao
+        }
+        System.out.println("null"); // Last me null print karna zaroori hai
+    }
+
+    // search() method linked list me kisi given key ko dhundhne ke liye helper()
+    // method call karta hai.
+    public int search(int key) {
+        return helper(head, key); // head se start karke recursion ke through search karega.
+    }
+
+    // helper() method jo actual recursive search perform karega.
+    public int helper(Node head, int key) {
+        // Base case: Agar linked list khatam ho gayi aur key nahi mili toh -1 return
+        // karo.
+        if (head == null) {
+            return -1; // Key exist nahi karti.
+        }
+
+        // Agar current node ka data given key ke barabar hai toh return 0.
+        if (head.data == key) {
+            return 0; // Key mil gayi, index 0 return karenge.
+        }
+
+        // Recursively next node par search karne ke liye call karo.
+        int idx = helper(head.next, key);
+
+        // Agar key next nodes me bhi nahi mili toh -1 return karo.
+        if (idx == -1) {
+            return -1;
+        }
+
+        // Agar key kisi aage ke node me mili toh current node ka index (idx + 1) return
+        // karo.
+        return idx + 1; // Pichle node ke index me 1 add karte hue return karenge.
+    }
+
+    public static void main(String[] args) {
+        SearchRecursive obj = new SearchRecursive();
+        obj.addlast(20); // 20 insert kiya last me
+        obj.addlast(30); // 30 insert kiya last me
+        obj.addlast(50); // 50 insert kiya last me
+        System.out.println(obj.search(30));
+
+        display(); // Linked list ko print karne ke liye function call kiya
+    }
+}
