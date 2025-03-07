@@ -1,0 +1,37 @@
+package Math_problem;
+import java.util.Arrays; 
+
+public class MaximumProductOfThreeNumbers {
+    
+        public static int maximumProduct(int[] nums) { // maximumProduct function define kiya jo ek integer array input lega aur ek integer return karega.
+            
+            Arrays.sort(nums); // Array ko sort kar diya (ascending order me) taaki hum minimum aur maximum values ko easily access kar sakein.
+    
+            int n = nums.length; // Array ka length store kiya ek variable `n` me, taaki baar-baar `nums.length` na likhna pade.
+    
+            /*
+            Maximum product do tarikon se aa sakta hai:
+            1. Sabse bade teen numbers ka product (jo sorted array ke last ke teen elements honge).
+            2. Do sabse chhote numbers (negative values bhi ho sakti hain) ka product aur sabse bada number ka product.
+            
+            Hum dono cases ko calculate karke jo maximum hoga use return karenge.
+            */
+    
+            return Math.max(nums[n - 1] * nums[n - 2] * nums[n - 3], // Last ke 3 numbers ka product
+                            nums[0] * nums[1] * nums[n - 1]); // First ke 2 (negative ho sakte hain) aur last number ka product
+        }
+    
+        public static void main(String[] args) { // Main method jisme hum function test karenge
+            
+            int[] nums1 = {1, 2, 3}; 
+            System.out.println(maximumProduct(nums1)); // Expected Output: 6 (1 * 2 * 3)
+    
+            int[] nums2 = {1, 2, 3, 4}; 
+            System.out.println(maximumProduct(nums2)); // Expected Output: 24 (2 * 3 * 4)
+    
+            int[] nums3 = {-10, -10, 5, 2}; 
+            System.out.println(maximumProduct(nums3)); // Expected Output: 500 (-10 * -10 * 5)
+        }
+    }
+    
+
