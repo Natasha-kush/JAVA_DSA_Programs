@@ -1,0 +1,46 @@
+package Math_problem;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class HappyNumber {
+    public boolean isHappy(int n) {
+        // Ek HashSet banaya jo pehle se aaye numbers ko track karega taki loop detect
+        // ho sake
+        Set<Integer> usednumber = new HashSet<>();
+
+        while (true) {
+            int sum = 0; // Har iteration me sum ko reset kar rahe hain
+
+            // Har digit ka square ka sum nikal rahe hain
+            while (n != 0) {
+                sum += Math.pow(n % 10, 2.0); // Last digit ka square add kar rahe hain
+                n = n / 10; // Last digit hata rahe hain
+            }
+
+            // Agar sum 1 ho jaye to number happy number hai
+            if (sum == 1)
+                return true;
+
+            // Naya n assign kar rahe hain jo sum hai
+            n = sum;
+
+            // Agar number phir se aagaya (loop detect ho gaya) to false return karenge
+            if (usednumber.contains(n))
+                return false;
+
+            // Naye number ko set me add kar rahe hain
+            usednumber.add(n);
+        }
+    }
+
+    public static void main(String[] args) {
+        HappyNumber solution = new HappyNumber();
+
+        // Kuch test cases run kar rahe hain
+        System.out.println(solution.isHappy(19)); // Output: true (Happy Number)
+        System.out.println(solution.isHappy(2)); // Output: false (Not a Happy Number)
+        System.out.println(solution.isHappy(7)); // Output: true (Happy Number)
+        System.out.println(solution.isHappy(4)); // Output: false (Not a Happy Number)
+    }
+}
