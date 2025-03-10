@@ -1,0 +1,95 @@
+package Array_dsa;
+
+import java.util.Arrays;
+
+//Yeh code Game of Life problem ka solution hai,
+// jisme ek 2D grid di hoti hai aur har cell alive (1) ya dead (0) hoti hai. 
+//Har generation ke baad kuch rules ke according grid update hoti hai.
+public class GameOfLife {
+    public void gameOfLife(int[][] board) {
+        // numRows aur numCols board ke rows aur columns ka size store kar rahe hain.
+        int numRows = board.length;
+        int numCols = board[0].length;
+
+        // Pure board ko traverse karne ke liye loop chala rahe hain.
+        for (int row = 0; row < numRows; ++row) {
+            for (int col = 0; col < numCols; ++col) {
+                // Har cell ke live neighbors count karne ke liye, initially board[row][col]
+                // minus kar diya
+                // taaki agar wo cell khud alive hai to usko count na kare.
+                int liveNeighbors = -board[row][col];
+
+                // 3x3 ka window iterate kar rahe hain jo current cell ke around hoti hai.
+                for (int i = row - 1; i <= row + 1; ++i) {
+                    for (int j = col - 1; j <= col + 1; ++j) {
+                        // Bounds check kar rahe hain aur check kar rahe hain ki kya board[i][j] alive
+                        // hai (i.e., > 0)
+                        if (i >= 0 && i < numRows && j >= 0 && j < numCols && board[i][j] > 0) {
+                            liveNeighbors++;
+                        }
+                    }
+                }
+
+                // **Rules Apply Karna:**
+
+                // Rule 1 & Rule 3: Agar ek live cell ke paas 2 se kam ya 3 se zyada live
+                // neighbors hain
+                // to wo mar jayegi (temporary state `2` use kar rahe hain jisse baad me change
+                // kar sakein)
+                if (board[row][col] == 1 && (liveNeighbors < 2 || liveNeighbors > 3)) {
+                    board[row][col] = 2; // Live to Dead
+                }
+
+                // Rule 4: Agar ek dead cell ke paas exactly 3 live neighbors hain
+                // to wo naya live cell ban jayega (temporary state `-1` use kar rahe hain)
+                if (board[row][col] == 0 && liveNeighbors == 3) {
+                    board[row][col] = -1; // Dead to Live
+                }
+            }
+        }
+
+        // **Board ko final state me convert karna**
+        for (int row = 0; row < numRows; ++row) {
+            for (int col = 0; col < numCols; ++col) {
+                // Jo cells pehle alive thi lekin mar gayi, unko 0 kar rahe hain
+                if (board[row][col] == 2) {
+                    board[row][col] = 0;
+                }
+                // Jo pehle dead thi lekin alive ho gayi, unko 1 kar rahe hain
+                else if (board[row][col] == -1) {
+                    board[row][col] = 1;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // Ek example board initialize karte hain
+        int[][] board = {
+                { 0, 1, 0 },
+                { 0, 0, 1 },
+                { 1, 1, 1 },
+                { 0, 0, 0 }
+        };
+
+        // Original Board Print karte hain
+        System.out.println("Original Board:");
+        printBoard(board);
+
+        // Solution ka object banake gameOfLife function call karte hain
+        GameOfLife solution = new GameOfLife();
+        solution.gameOfLife(board);
+
+        // Updated Board print karte hain
+        System.out.println("Next Generation Board:");
+        printBoard(board);
+    }
+
+    // Board print karne ke liye helper function
+    public static void printBoard(int[][] board) {
+        for (int[] row : board) {
+            System.out.println(Arrays.toString(row));
+        }
+        System.out.println();
+    }
+}
