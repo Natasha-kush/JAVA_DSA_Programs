@@ -1,0 +1,31 @@
+package Math_problem;
+
+//XOR ka ek special property hota hai: x ^ x = 0 aur x ^ 0 = x
+public class MissingNumber {
+    public int missingNumber(int[] nums) {
+        int xor = 0; // XOR ka initial value 0 set kar diya
+        int n = nums.length; // Array ka size store kiya
+
+        // Step 1: 0 se n tak sabhi numbers ka XOR le rahe hain
+        for (int i = 0; i <= n; i++) {
+            xor ^= i; // xor = xor ^ i (XOR operation apply kar rahe hain)
+        }
+
+        // Step 2: Array ke elements ka XOR le rahe hain
+        for (int num : nums) {
+            xor ^= num; // xor = xor ^ num (XOR se cancel karenge)
+        }
+
+        return xor; // Jo number bacha wahi missing number hai
+    }
+
+    // Main function to test the code
+    public static void main(String[] args) {
+        MissingNumber solution = new MissingNumber();
+
+        int[] nums = { 3, 0, 1 }; // Example input
+        int missing = solution.missingNumber(nums); // Function call
+
+        System.out.println("Missing number: " + missing); // Output print karega
+    }
+}
