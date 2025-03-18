@@ -1,0 +1,94 @@
+package Linked_List;
+
+public class ReverseLinkedList {
+    // Class banaya jo ek linked list implement karega jisme hum elements last me
+    // add kar sakte hain
+
+    // Node class banaya jo ek node ko represent karega
+    public class Node {
+
+        int data; // Node ka data store karega
+        Node next; // Next node ka reference store karega
+
+        // Constructor jo ek naya node banayega aur uska next initially null hoga
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    // Head and Tail pointers ko static banaya taki ye shared rahein
+    public static Node head;
+    public static Node tail;
+
+    public void addlast(int data) {
+        // Naya node banaya jisme `data` diya gaya hai
+        Node newNode = new Node(data);
+        // Agar linked list empty hai to head aur tail dono naya node honge
+        if (head == null) {
+            head = tail = newNode;
+            return;
+        }
+        // Agar list me pehle se nodes hain, to tail.next me naya node jod do
+        tail.next = newNode;
+        tail = newNode; // Tail ko update kar do taki last node pe point kare
+    }
+
+    public static void reverse() {
+        // Step 1: Previous node ko null se initialize kiya, kyunki reversal ke baad
+        // pehla node last banega jiska 'next' null hona chahiye.
+        Node prev = null;
+
+        // Step 2: Current node ko tail aur head ke equal set kiya.
+        // Iska matlab initially 'curr' starting node (head) ko point karega.
+        Node curr = tail = head;
+
+        // Step 3: 'next' pointer ko declare kiya jo temporary reference ke liye use
+        // hoga.
+        Node next;
+
+        // Step 4: Jab tak 'curr' null nahi ho jata, tab tak loop chalega.
+        while (curr != null) {
+
+            // Step 5: 'next' pointer ko 'curr.next' pe point karwaya.
+            // Iska kaam yeh hai ki hum next node ka reference na kho dein.
+            next = curr.next;
+
+            // Step 6: Current node ka 'next' pointer ko previous node pe point karwaya.
+            // Yeh step actual reversal perform kar raha hai.
+            curr.next = prev;
+
+            // Step 7: 'prev' ko 'curr' pe shift kar diya, taaki agla node previous ban
+            // sake.
+            prev = curr;
+
+            // Step 8: 'curr' ko 'next' pe move kiya, taaki loop aage bade.
+            curr = next;
+        }
+
+        // Step 9: Loop khatam hone ke baad 'head' ko 'prev' pe point karwaya,
+        // kyunki reversal ke baad 'prev' hi naya head ban chuka hoga.
+        head = prev;
+    }
+
+    public static void display() {
+        Node temp = head; // Temp pointer banaya jo head se start karega
+
+        // Jab tak temp null nahi hota, tab tak data print karo
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next; // Agle node pe move kar jao
+        }
+        System.out.println("null"); // Last me null print karna zaroori hai
+    }
+
+    public static void main(String[] args) {
+        ReverseLinkedList obj = new ReverseLinkedList();
+        obj.addlast(2); // 20 insert kiya last me
+        obj.addlast(3); // 30 insert kiya last me
+        obj.addlast(5); // 50 insert kiya last me
+        obj.addlast(6);
+        reverse();
+        display();
+    }
+}
