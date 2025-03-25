@@ -1,0 +1,86 @@
+package Linked_List;
+
+public class Palindrome_linkedlist {
+
+    public class Node {
+
+        int data; // Node ka data store karega
+        Node next; // Next node ka reference store karega
+
+        // Constructor jo ek naya node banayega aur uska next initially null hoga
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    // Head and Tail pointers ko static banaya taki ye shared rahein
+    public static Node head;
+    public static Node tail;
+
+    public void addlast(int data) {
+        // Naya node banaya jisme `data` diya gaya hai
+        Node newNode = new Node(data);
+        // Agar linked list empty hai to head aur tail dono naya node honge
+        if (head == null) {
+            head = tail = newNode;
+            return;
+        }
+        // Agar list me pehle se nodes hain, to tail.next me naya node jod do
+        tail.next = newNode;
+        tail = newNode; // Tail ko update kar do taki last node pe point kare
+    }
+
+    public Node findmid(Node head) {
+        Node slow = head; // Slow pointer ko head pe set kar rahe hain, yeh pointer ek step ek baar
+                          // chalega.
+        Node fast = head; // Fast pointer ko bhi head pe set kar rahe hain, yeh pointer do steps ek baar
+                          // chalega.
+        while (fast != null && fast.next != null) { // Jab tak fast pointer null nahi ho jata ya fast.next null nahi
+                                                    // hota, loop chalega.
+            slow = slow.next; // Slow pointer ek step aage badhega.
+            fast = fast.next.next; // Fast pointer do steps aage badhega.
+        }
+        return slow; // Jab fast pointer end pe pahuch jayega, slow pointer mid pe hoga. Isliye slow
+                     // ko return karenge, yeh middle node hai.
+    }
+
+    public boolean checkpalin() {
+        if (head == null || head.next == null) { // Agar linked list empty hai ya ek hi element hai, toh wo palindromic
+                                                 // hai.
+            return true;
+        }
+        Node midfind = findmid(head); // Mid node find karne ke liye findmid() function call karenge.
+        Node prev = null; // Previous node ko null se initialize karenge, yeh reversal me kaam aayega.
+        Node curr = midfind; // Current node ko midfind pe set karenge, jahan se reversal start hoga.
+        Node next; // Next node ka reference rakhne ke liye.
+        while (curr != null) { // Jab tak current node null nahi hota, loop chalega.
+            next = curr.next; // Next node ko store karenge.
+            curr.next = prev; // Current node ka next pointer previous node ko point karega (reverse karna
+                              // hai).
+            prev = curr; // Previous ko current node pe set karenge (ab yeh previous ban gaya).
+            curr = next; // Current ko next node pe set karenge (ab yeh next ban gaya).
+        }
+        Node right = prev; // Yeh right pointer ab list ka reverse half hai.
+        Node left = head; // Left pointer list ke start se hai.
+        while (right != null) { // Jab tak right pointer null nahi hota, left aur right ko compare karte
+                                // rahenge.
+            if (left.data != right.data) { // Agar left aur right ki values match nahi karte, toh linked list palindrome
+                                           // nahi hai.
+                return false;
+            }
+            left = left.next; // Left pointer ko next node pe move karenge.
+            right = right.next; // Right pointer ko next node pe move karenge.
+        }
+        return true; // Agar koi mismatch nahi aaya, toh list palindrome hai, true return karenge.
+    }
+
+    public static void main(String[] args) {
+        Palindrome_linkedlist obj = new Palindrome_linkedlist();
+        obj.addlast(1); // 20 insert kiya last me
+        obj.addlast(2); // 30 insert kiya last me
+        obj.addlast(2); // 50 insert kiya last me
+        obj.addlast(5);
+        System.out.println(obj.checkpalin());
+    }
+}
