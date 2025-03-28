@@ -1,0 +1,134 @@
+package Linked_List;
+// Ye package ka naam hai, jo batata hai ki ye code "Linked_List" folder ke andar hai.
+
+public class Removing_cycle {
+    // Removing_cycle naam ka ek public class banaya gaya hai.
+
+    public class Node {
+        // Ye inner class hai jo ek node ka structure define karta hai.
+
+        int data;
+        // Har node ka ek data field hoga jo integer value store karega.
+
+        Node next;
+        // Har node ke paas ek pointer hoga jo next node ka reference store karega.
+
+        public Node(int data) {
+            // Constructor banaya gaya jo ek new node ke data field ko initialize karega.
+            this.data = data;
+            this.next = null;
+            // Jab node create hoti hai, tab initially next null hota hai.
+        }
+    }
+
+    public static Node head;
+    // Ye static variable head ko define karta hai jo linked list ke first node ko
+    // point karega.
+
+    public static Node tail;
+    // Ye static variable tail ko define karta hai jo linked list ke last node ko
+    // point karega.
+    public static boolean iscycle() {
+        Node slow = head; // Slow pointer ko head pe initialize karte hain
+        Node fast = head; // Fast pointer ko bhi head pe initialize karte hain
+
+        // Loop jab tak fast null ya fast.next null na ho
+        while (fast != null && fast.next != null) {
+            slow = slow.next; // Slow pointer ek step aage badhta hai
+            fast = fast.next.next; // Fast pointer do steps aage badhta hai
+
+            // Agar slow aur fast kisi point par equal ho jaate hain
+            if (slow == fast) {
+                return true; // Cycle detected
+            }
+        }
+        return false; // Agar loop ke baad koi match nahi mila, to cycle nahi hai
+    }
+    public static void removecycle() {
+        // Ye function linked list ke andar cycle detect karega aur usko remove karega.
+
+        Node slow = head;
+        // Slow pointer ko initially head par set kiya gaya hai.
+
+        Node fast = head;
+        // Fast pointer ko bhi initially head par set kiya gaya hai.
+
+        boolean cycle = false;
+        // Cycle detect karne ke liye ek flag variable banaya gaya jo initially false
+        // hai.
+
+        while (fast != null && fast.next != null) {
+            // Jab tak fast pointer aur fast.next null nahi hote, tab tak loop chalega.
+
+            slow = slow.next;
+            // Slow pointer ek step aage badhta hai.
+
+            fast = fast.next.next;
+            // Fast pointer do steps aage badhta hai.
+
+            if (fast == slow) {
+                // Agar fast aur slow pointer ek hi node par milte hain, iska matlab cycle
+                // present hai.
+                cycle = true;
+                break;
+                // Cycle detect hone par loop se bahar aa jaate hain.
+            }
+        }
+
+        if (!cycle) {
+            // Agar cycle detect nahi hoti, to function return kar deta hai.
+            return;
+        }
+
+        slow = head;
+        // Slow pointer ko wapas head par le jaate hain.
+
+        Node prev = null;
+        // Ek prev pointer banaya gaya jo fast pointer ka pichla node track karega.
+
+        while (slow != fast) {
+            // Jab tak fast aur slow pointer same node par nahi pahuchte, loop chalega.
+
+            prev = fast;
+            // Prev pointer ko fast pointer ke current node par update karte hain.
+
+            slow = slow.next;
+            // Slow pointer ek step aage badhta hai.
+
+            fast = fast.next;
+            // Fast pointer ek step aage badhta hai.
+        }
+
+        prev.next = null;
+        // Cycle ko todne ke liye prev.next ko null kar dete hain (jo cycle ban rahi thi
+        // usko remove kar diya).
+    }
+
+    public static void main(String[] args) {
+        // Main function program ko execute karta hai.
+
+        Removing_cycle list = new Removing_cycle();
+        // Class ka ek instance create kiya linked list banane ke liye.
+
+        head = list.new Node(1);
+        // Linked list ka pehla node banaya aur usko head pointer se point karwaya.
+
+        Node temp = list.new Node(2);
+        // Dusra node banaya aur usko temp variable se store kiya.
+
+        head.next = temp;
+        // Pehle node ke "next" pointer ko dusre node par point karwaya.
+
+        head.next.next = list.new Node(3);
+        // Teesre node ko create karke dusre node ke "next" pointer me attach kiya.
+
+        head.next.next.next = temp;
+        // Teesre node ka "next" pointer head node ko point karwa diya (cycle create kar
+        // di).
+        System.out.print(iscycle());
+        removecycle();
+        System.out.print(iscycle());
+        // removecycle function ko call kiya jo cycle detect karega aur usko remove
+        // karega.
+    }
+}
