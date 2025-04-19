@@ -1,0 +1,85 @@
+package Array_dsa;
+
+import java.util.Random; // Importing the Random class for generating random numbers
+
+public class Kth_smallest_element_array {
+
+    public static void main(String[] args) {
+        // Sample array and the value of k
+        int[] arr = { 7, 10, 4, 3, 20, 15 };
+        int k = 3; // We want to find the 3rd smallest element
+
+        // Call the kthSmallest method and store the result
+        int result = kthSmallest(arr, k);
+        // Print the result
+        System.out.println(k + "th smallest element is: " + result);
+    }
+
+    // Method to find the kth smallest element in the array
+    public static int kthSmallest(int[] arr, int k) {
+        // Call the quickSelect method with the full range of the array
+        return quickSelect(arr, 0, arr.length - 1, k - 1); // k-1 for 0-based index
+    }
+
+    // Quickselect method to find the kth smallest element
+    private static int quickSelect(int[] arr, int left, int right, int k) {
+        // Base case: if the sub-array has only one element
+        if (left == right) {
+            return arr[left]; // Return that element
+        }
+
+        // Create a Random object to select a pivot
+        Random rand = new Random();
+        // Randomly select a pivot index within the current sub-array
+        int pivotIndex = left + rand.nextInt(right - left + 1);
+        // Partition the array around the pivot and get the final position of the pivot
+        pivotIndex = partition(arr, left, right, pivotIndex);
+
+        // Check the position of the pivot
+        if (k == pivotIndex) {
+            return arr[k]; // If pivot is at the kth position, return it
+        } else if (k < pivotIndex) {
+            // If k is less than pivotIndex, search in the left sub-array
+            return quickSelect(arr, left, pivotIndex - 1, k);
+        } else {
+            // If k is greater than pivotIndex, search in the right sub-array
+            return quickSelect(arr, pivotIndex + 1, right, k);
+        }
+    }
+
+    // Method to partition the array around the pivot
+    private static int partition(int[] arr, int left, int right, int pivotIndex) {
+        // Store the pivot value
+        int pivotValue = arr[pivotIndex];
+        // Move the pivot to the end of the current sub-array
+        swap(arr, pivotIndex, right);
+        // Initialize storeIndex to track the position for smaller elements
+        int storeIndex = left;
+
+        // Iterate through the array from left to right (excluding the pivot)
+        for (int i = left; i < right; i++) {
+            // If the current element is smaller than the pivot value
+            if (arr[i] < pivotValue) {
+                // Swap it with the element at storeIndex
+                swap(arr, storeIndex, i);
+                // Increment storeIndex
+                storeIndex++;
+            }
+        }
+
+        // Move the pivot to its final position
+        swap(arr, storeIndex, right);
+        // Return the final position of the pivot
+        return storeIndex;
+    }
+
+    // Method to swap two elements in the array
+    private static void swap(int[] arr, int i, int j) {
+        // Store the value of the first element in a temporary variable
+        int temp = arr[i];
+        // Assign the value of the second element to the first element's position
+        arr[i] = arr[j];
+        // Assign the value stored in temp to the second element's position
+        arr[j] = temp;
+    }
+}
