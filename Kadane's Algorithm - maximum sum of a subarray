@@ -1,0 +1,31 @@
+public class KadaneAlgorithm {
+    public static int maxSubArraySum(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            // Edge Case: Agar array null ya empty ho, toh kuch return karna possible nahi
+            System.out.println("Array is empty. No subarray exists.");
+            return 0;
+        }
+
+        // Initialization:
+        // currentSum - abhi tak ka subarray ka sum
+        // maxSum - sabse bada sum jo ab tak mila
+        int currentSum = arr[0];
+        int maxSum = arr[0];
+
+        // Loop pura array traverse karega starting from index 1
+        for (int i = 1; i < arr.length; i++) {
+
+            // Har element ke liye decide karo:
+            // 1. Kya naya subarray yahin se start karna better hai?
+            // 2. Ya purane subarray me is element ko jodna better hai?
+            currentSum = Math.max(arr[i], currentSum + arr[i]);
+
+            // Agar currentSum zyada hai maxSum se, toh update karo
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        // Final answer return karo
+        return maxSum;
+    }
+
+ 
