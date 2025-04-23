@@ -1,0 +1,78 @@
+package Linked_List;
+
+import java.util.HashSet;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class IntersectionLinkedList {
+
+    // Function to get intersection of two linked lists
+    public static Node findIntersection(Node head1, Node head2) {
+        HashSet<Integer> set = new HashSet<>();
+        Node resultHead = null, resultTail = null;
+
+        // Step 1: Store all elements of head2 in HashSet
+        Node temp2 = head2;
+        while (temp2 != null) {
+            set.add(temp2.data);
+            temp2 = temp2.next;
+        }
+
+        // Step 2: Traverse head1 and check for intersection
+        Node temp1 = head1;
+        while (temp1 != null) {
+            if (set.contains(temp1.data)) {
+                // Create new node with temp1.data
+                Node newNode = new Node(temp1.data);
+                if (resultHead == null) {
+                    resultHead = newNode;
+                    resultTail = newNode;
+                } else {
+                    resultTail.next = newNode;
+                    resultTail = newNode;
+                }
+            }
+            temp1 = temp1.next;
+        }
+
+        return resultHead;
+    }
+
+    // Utility method to print list
+    public static void printList(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    // Test Driver
+    public static void main(String[] args) {
+        // LinkedList 1: 9->6->4->2->3->8
+        Node head1 = new Node(9);
+        head1.next = new Node(6);
+        head1.next.next = new Node(4);
+        head1.next.next.next = new Node(2);
+        head1.next.next.next.next = new Node(3);
+        head1.next.next.next.next.next = new Node(8);
+
+        // LinkedList 2: 1->2->8->6
+        Node head2 = new Node(1);
+        head2.next = new Node(2);
+        head2.next.next = new Node(8);
+        head2.next.next.next = new Node(6);
+
+        Node result = findIntersection(head1, head2);
+        printList(result); // Output: 6 2 8
+    }
+}
