@@ -1,0 +1,15 @@
+class Solution {
+    public int modularNode(Node head, int k) {
+        int index =1;
+        int result = -1;
+        Node curr = head;
+        while(curr != null){
+            if(index % k ==0){
+                result = curr.data;
+            }
+            index++;
+            curr = curr.next;
+        }
+        return result;
+    }
+}
