@@ -1,0 +1,21 @@
+// User function Template for Java
+
+class Solution {
+    public int maximumProfit(int prices[]) {
+        int minp = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        
+        for(int ele: prices){
+            if(ele < minp){
+                minp = ele;
+            }else{
+                int profit = ele - minp;
+                if(profit> maxprofit){
+                maxprofit = profit;
+            }
+            }     
+        }
+        
+        return maxprofit;
+    }
+}
