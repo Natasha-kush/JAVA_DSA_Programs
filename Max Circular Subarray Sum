@@ -1,0 +1,24 @@
+class Solution {
+    public int circularSubarraySum(int arr[]) {
+        // code here
+        int total = 0;
+        int curmax =0, curmin =0;
+        int maxsum =arr[0];
+        int minsum = arr[0];
+        
+        for(int i =0; i<arr.length; i++){
+            curmax = Math.max(curmax + arr[i], arr[i]);
+            maxsum = Math.max(maxsum, curmax);
+            
+            curmin = Math.min(curmin +arr[i], arr[i]);
+            minsum = Math.min(minsum, curmin);
+            
+            total += arr[i];
+        }
+       int circularsum = total - minsum;
+        if(minsum == total){
+            return maxsum;
+        }
+        return Math.max(circularsum, maxsum);
+    }
+}
