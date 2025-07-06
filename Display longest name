@@ -1,0 +1,14 @@
+
+class Solution {
+    public String longest(List<String> arr) {
+      String big = arr.get(0);
+      for(int i =1; i<arr.size(); i++){
+          String curr = arr.get(i);
+          if(curr.length() > big.length()){
+              big = curr;
+          }
+        }
+       return big;
+        
+    }
+}
