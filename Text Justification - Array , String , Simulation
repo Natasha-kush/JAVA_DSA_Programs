@@ -1,0 +1,40 @@
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+         List<String> res = new ArrayList<>();
+        int i = 0, n = words.length;
+        
+        while (i < n) {
+            int j = i, len = 0;
+            // Find how many words fit in the line
+            while (j < n && len + words[j].length() + (j - i) <= maxWidth) {
+                len += words[j].length();
+                j++;
+            }
+            
+            int gaps = j - i - 1;
+            StringBuilder sb = new StringBuilder();
+            
+            // Last line or single word - left justify
+            if (j == n || gaps == 0) {
+                for (int k = i; k < j; k++) {
+                    sb.append(words[k]);
+                    if (k != j - 1) sb.append(' ');
+                }
+                while (sb.length() < maxWidth) sb.append(' ');
+            } else {
+                // Full justify
+                int sp = (maxWidth - len) / gaps;
+                int extra = (maxWidth - len) % gaps;
+                for (int k = i; k < j; k++) {
+                    sb.append(words[k]);
+                    if (k != j - 1) {
+                        for (int s = 0; s < sp + (k - i < extra ? 1 : 0); s++) sb.append(' ');
+                    }
+                }
+            }
+            res.add(sb.toString());
+            i = j;
+        }
+        return res;
+    }
+}
