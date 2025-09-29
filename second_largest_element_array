@@ -24,3 +24,36 @@ public class second_largest_element {
      System.out.print(secondfind(arr));
     }
 }
+
+
+// second solution 
+
+
+import java.util.*;
+//find the second largest element in an array
+//single pass ,handle duplicate
+public class Main {
+    public static void main(String[] args) {
+      int arr[]={2,5,7,8,6,9,10,9,7};
+      int first = arr[0];
+      int second = arr[0];
+      
+      for(int num:arr) {
+        
+        if( num > first){
+          second = first;
+          first = num;
+        } else if(num != first && (num > second)){
+          second = num;
+        }
+        
+      }
+      
+      if(second == arr[0]){
+        System.out.println("no second largest found");
+      }else{
+        System.out.println("second largest found " + second);
+      }
+      
+  }
+}
