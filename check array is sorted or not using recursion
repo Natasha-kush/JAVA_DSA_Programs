@@ -16,3 +16,27 @@ public class array_is_sorted_or_not {
         System.out.print(issorted(arr,0));
     }
 }
+-----------------------------------------second solution-------------------------------------------
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        int arr[] = {1, 2, 3, 4, 5, 6};
+       
+        Boolean check = true;  // Assume array is sorted initially
+        // Loop through the array from start to second last element
+        for (int i = 0; i < arr.length - 1; i++) {
+            // Check if current element is greater than the next element
+            if (arr[i] > arr[i + 1]) {
+                check = false;  // If yes, array is not sorted
+                break;          // Exit the loop early as we found unsorted pair
+            }
+        }
+        
+        // After loop, check the flag and print result
+        if (check == false) {
+            System.out.println("array is not sorted");
+        } else {
+            System.out.println("array is sorted");
+        }
+    }
+}
