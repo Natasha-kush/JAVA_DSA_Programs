@@ -1,2 +1,2 @@
-# Java_DSA_Programs
-This repository includes DSA and JAVA programs written in Java.
+# Java & C# DSA Programs
+This repository includes DSA programs written in JAVA & C#.
